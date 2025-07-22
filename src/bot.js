@@ -25,12 +25,13 @@ const __dirname = path.dirname(__filename);
 app.post(`/bot${token}`, (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
-  console.log(req.body);
+  // console.log(req.body);
 });
 
 // Bot logic
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
+  console.log(`Received message from chat ${chatId}:`, msg.text);
   bot.sendMessage(chatId, 'Received your message boy, ');
   bot.sendAudio(chatId, path.join(__dirname, 'resources', 'bot-reply.mp3'));
 });
