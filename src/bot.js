@@ -12,7 +12,7 @@ console.log("Token:", token);
 const port = process.env.PORT || 3000;
 const webhookUrl = process.env.WEBHOOK_URL; // e.g., https://yourdomain.com/bot<token>
 
-const bot = new TelegramBot(token);
+const bot = new TelegramBot(token, { webHook: true });
 const app = express();
 app.use(express.json());
 
@@ -25,7 +25,7 @@ const __dirname = path.dirname(__filename);
 app.post(`/bot${token}`, (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
-  // console.log(req.body);
+  console.log("CHildren things arre working");
 });
 
 // Bot logic
