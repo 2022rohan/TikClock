@@ -25,7 +25,7 @@ const __dirname = path.dirname(__filename);
 app.post(`/bot${token}`, (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
-  console.log(req);
+  console.log(req.body);
 });
 
 // Bot logic
@@ -39,7 +39,7 @@ app.listen(port, async () => {
   console.log(`Express server is listening on ${port}`);
   try {
     const info = await bot.setWebHook(`${webhookUrl}/bot${token}`);
-    console.log("Webhook set:", info);
+    // console.log("Webhook set:", info);
   } catch (err) {
     console.error("Webhook setup failed:", err);
   }
