@@ -6,7 +6,9 @@ import { fileURLToPath } from "url";
 
 config({ path: './.env' });
 
+
 const token = process.env.TELEGRAM_BOT_TOKEN;
+console.log("Token:", token);
 const port = process.env.PORT || 3000;
 const webhookUrl = process.env.WEBHOOK_URL; // e.g., https://yourdomain.com/bot<token>
 
@@ -18,8 +20,6 @@ app.use(express.json());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Set webhook
-bot.setWebHook(`${webhookUrl}/bot${token}`);
 
 // Handle webhook requests
 app.post(`/bot${token}`, (req, res) => {
@@ -31,10 +31,16 @@ app.post(`/bot${token}`, (req, res) => {
 // Bot logic
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
-  bot.sendMessage(chatId, 'Received your message');
+  bot.sendMessage(chatId, 'Received your message boy, ');
   bot.sendAudio(chatId, path.join(__dirname, 'resources', 'bot-reply.mp3'));
 });
 
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Express server is listening on ${port}`);
+  try {
+    const info = await bot.setWebHook(`${webhookUrl}/bot${token}`);
+    console.log("Webhook set:", info);
+  } catch (err) {
+    console.error("Webhook setup failed:", err);
+  }
 });
