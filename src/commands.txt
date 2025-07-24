@@ -1,0 +1,9 @@
+ curl -F "url=https://tikclock.onrender.com" https://api.telegram.org/bot8023515875:AAGvu3EpOSH28IShoETkECxhU-AAgIKvcUU/setWebhook
+ command for setting webhook manually
+
+ chatid for me-"5940941455"
+ pushkar chat id="5147495787"
+
+ 
+
+

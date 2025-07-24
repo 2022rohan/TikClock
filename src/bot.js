@@ -3,14 +3,17 @@ import { config } from "dotenv";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import cron from "node-cron";
 
 config({ path: './.env' });
 
 
 const token = process.env.TELEGRAM_BOT_TOKEN;
 console.log("Token:", token);
+
 const port = process.env.PORT || 3000;
-const webhookUrl = process.env.WEBHOOK_URL; // e.g., https://yourdomain.com/bot<token>
+const webhookUrl = process.env.WEBHOOK_URL; 
+console.log("Webhook URL:", webhookUrl);
 
 const bot = new TelegramBot(token, { webHook: true });
 const app = express();
@@ -20,6 +23,10 @@ app.use(express.json());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+cron.schedule('0 35 11 * * *', () => {
+  console.log('Running daily task at 2 AM');
+  // Add your daily task logic here
+});
 
 // Handle webhook requests
 app.post(`/bot${token}`, (req, res) => {
