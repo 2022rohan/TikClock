@@ -21,7 +21,13 @@ bot.on('message',(msg)=>{
         console.log("Parsed date:", date);
         const child=fork("./utils/backgroundTaskScheduler.js");
         const delayInSeconds = Math.floor((date.getTime() - Date.now()) / 1000);
-        child.send({timeInSeconds: delayInSeconds, message: msg.text,chatId:chatId});
+        try{
+           child.send({timeInSeconds: delayInSeconds, message: msg.text,chatId:chatId});
+        }
+        catch(err){
+            console.log(err);
+        }
+        
         bot.sendMessage(chatId, `Babu ma apko yaad dila dungi at sharp: ${date.toLocaleString()}`);
     }
     // bot.sendMessage(chatId, 'Aapka message mujhe mil gaya hai! bhai 😊 \n\n main abhi apke baare mein jankari nikalta hun');
