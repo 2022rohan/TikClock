@@ -18,7 +18,7 @@ process.on("message", ({ timeInSeconds, message, chatId }) => {
       await bot.sendMessage(chatId, "Babu apko wo kaam karna tha");
       console.log("Message sent successfully");
     } catch (err) {
-      console.log(err);
+      console.log(`$this is error${err}`);
     }
     finally{
         process.exit();

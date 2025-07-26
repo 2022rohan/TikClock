@@ -2,6 +2,7 @@ import TelegramBot from "node-telegram-bot-api";
 import { config } from "dotenv";
 import * as chrono from 'chrono-node';
 import { fork } from "child_process";
+import connection from "./redis_client.js";
 
 config({ path: '../.env' });
 const TOKEN=process.env.TELEGRAM_BOT_TOKEN;
